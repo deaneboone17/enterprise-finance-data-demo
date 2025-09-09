@@ -51,6 +51,8 @@ Create a SQL Serverless warehouse (Small, auto-stop 10m) and run 03_kpis_gold.sq
 
 </details>
 
+---
+
 
 ### Architecture
 
@@ -62,6 +64,8 @@ Create a SQL Serverless warehouse (Small, auto-stop 10m) and run 03_kpis_gold.sq
   
   D --> E[Notebook charts / SQL Serverless]
   
+
+  ---
   
 
 ### What to demo live
@@ -77,7 +81,9 @@ Create a SQL Serverless warehouse (Small, auto-stop 10m) and run 03_kpis_gold.sq
 5. Visuals: one payments trend, one chargeback rate chart.
 
 6. Portability: flip source from DBFS → GCS with only path + creds changes.
-   
+
+---
+
 
 ### Costs (Hybrid B+)
 
@@ -88,31 +94,56 @@ Create a SQL Serverless warehouse (Small, auto-stop 10m) and run 03_kpis_gold.sq
 3. 3–4 runs/month: typically ~$4–$12/month total.
 
 4. Guardrails: auto-termination (10m), auto-stop (10m), job timeouts, minimal retries.
-   
+
+---
+
 
 ### Repo layout
 infra/
-  gcp_setup.md            # (optional) bucket + SA notes
-  snowflake_setup.md      # (optional) external stage path
+
+    gcp_setup.md            # (optional) bucket + SA notes
+
+    snowflake_setup.md      # (optional) external stage path
+  
 pipelines/
-  databricks/
-    01_ingest_bronze.py   # Python notebook (or copy into one)
-    02_transform_silver.py
-    03_kpis_gold.sql
+
+     databricks/
+  
+       01_ingest_bronze.py   # Python notebook (or copy into one)
+    
+       02_transform_silver.py
+    
+       03_kpis_gold.sql
+    
   snowflake/
+  
     stage_ingest.sql
+    
     transform_core.sql
+    
     kpis.sql
+    
 analytics/
-  dashboard_walkthrough.md
+
+    dashboard_walkthrough.md
+  
 scripts/
-  upload_to_gcs.sh        # helper (edit BUCKET then run)
+
+    upload_to_gcs.sh           # helper (edit BUCKET then run)
+  
 data/
-  raw/                    # place CSVs here if using DBFS
+
+    raw/                       # place CSVs here if using DBFS
+  
 assets/
-  pipeline-architecture.png
-  payments_trend.png
-  chargeback_rate.png
+
+    pipeline-architecture.png
+  
+    payments_trend.png
+  
+    chargeback_rate.png
+
+---
 
 
 ### Next steps / Productionization
@@ -129,10 +160,12 @@ assets/
 
 - Parity: optional Snowflake external stage + COPY INTO to mirror KPIs.
 
+---
 
 ### Credits
 
-Built by YOUR NAME.
+Built by Deane Boone.
+
 💼 LinkedIn: https://www.linkedin.com/in/deaneboone/
 
 🧑‍💻 GitHub: https://github.com/deaneboone17
