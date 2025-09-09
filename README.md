@@ -6,9 +6,10 @@
 
 **What this is:** 
 a portfolio-ready data platform demo:
+
 raw CSV ➜ **Bronze** (Delta) ➜ **Silver** (cleaned views) ➜ **Gold** KPIs (payments, revenue, chargeback rate).
 
-📦 Data lives in GCS (Hybrid B+) or DBFS (Free Edition). Costs approximately a few dollars per month when using GCP.
+📦 Data lives in GCS or DBFS (Free Edition). Costs approximately a few dollars per month when using GCP.
 
 ---
 
