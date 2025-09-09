@@ -32,6 +32,7 @@ raw CSV ➜ **Bronze** (Delta) ➜ **Silver** (cleaned views) ➜ **Gold** KPIs 
    SELECT * FROM gold_chargeback_rate ORDER BY month;
 
 </details>
+
 ### Option B — Hybrid B+ (GCP bucket + tiny cluster + SQL Serverless)
 <details> 
 <summary>Expand</summary>
@@ -50,12 +51,14 @@ Create a SQL Serverless warehouse (Small, auto-stop 10m) and run 03_kpis_gold.sq
 
 </details>
 
+
 ### Architecture
 
   A[Raw CSVs (GCS or DBFS)] --> B[Bronze (Delta tables)]
   B --> C[Silver (typed/cleaned views)]
   C --> D[Gold KPIs (views)]
   D --> E[Notebook charts / SQL Serverless]
+  
 
 ### What to demo live
 
@@ -70,6 +73,7 @@ Create a SQL Serverless warehouse (Small, auto-stop 10m) and run 03_kpis_gold.sq
 5. Visuals: one payments trend, one chargeback rate chart.
 
 6. Portability: flip source from DBFS → GCS with only path + creds changes.
+   
 
 ### Costs (Hybrid B+)
 
@@ -80,6 +84,7 @@ Create a SQL Serverless warehouse (Small, auto-stop 10m) and run 03_kpis_gold.sq
 3. 3–4 runs/month: typically ~$4–$12/month total.
 
 4. Guardrails: auto-termination (10m), auto-stop (10m), job timeouts, minimal retries.
+   
 
 ### Repo layout
 infra/
@@ -105,6 +110,7 @@ assets/
   payments_trend.png
   chargeback_rate.png
 
+
 ### Next steps / Productionization
 
 - Ingestion: switch CSV reads to Auto Loader for Bronze.
@@ -118,6 +124,7 @@ assets/
 - Cost: small node types, short auto-termination, few chunky runs.
 
 - Parity: optional Snowflake external stage + COPY INTO to mirror KPIs.
+
 
 ### Credits
 
