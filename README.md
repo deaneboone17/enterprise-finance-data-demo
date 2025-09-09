@@ -32,8 +32,9 @@ raw CSV ➜ **Bronze** (Delta) ➜ **Silver** (cleaned views) ➜ **Gold** KPIs 
    SELECT * FROM gold_chargeback_rate ORDER BY month;
 
 </details>
-###Option B — Hybrid B+ (GCP bucket + tiny cluster + SQL Serverless)
-<details> <summary>Expand</summary>
+### Option B — Hybrid B+ (GCP bucket + tiny cluster + SQL Serverless)
+<details> 
+<summary>Expand</summary>
 
 Put CSVs in gs://🟩your-bucket/raw/{subscriptions,payments,chargebacks}/.
 
@@ -49,14 +50,14 @@ Create a SQL Serverless warehouse (Small, auto-stop 10m) and run 03_kpis_gold.sq
 
 </details>
 
-###Architecture
+### Architecture
 
   A[Raw CSVs (GCS or DBFS)] --> B[Bronze (Delta tables)]
   B --> C[Silver (typed/cleaned views)]
   C --> D[Gold KPIs (views)]
   D --> E[Notebook charts / SQL Serverless]
 
-###What to demo live
+### What to demo live
 
 1. Raw landing (GCS or DBFS) → same files can feed multiple engines.
 
@@ -70,7 +71,7 @@ Create a SQL Serverless warehouse (Small, auto-stop 10m) and run 03_kpis_gold.sq
 
 6. Portability: flip source from DBFS → GCS with only path + creds changes.
 
-###Costs (Hybrid B+)
+### Costs (Hybrid B+)
 
 1. Tiny all-purpose cluster for Bronze/Silver: ~1 DBU/run + small GCP VM fraction → about $1/run.
 
@@ -80,7 +81,7 @@ Create a SQL Serverless warehouse (Small, auto-stop 10m) and run 03_kpis_gold.sq
 
 4. Guardrails: auto-termination (10m), auto-stop (10m), job timeouts, minimal retries.
 
-###Repo layout
+### Repo layout
 infra/
   gcp_setup.md            # (optional) bucket + SA notes
   snowflake_setup.md      # (optional) external stage path
@@ -104,7 +105,7 @@ assets/
   payments_trend.png
   chargeback_rate.png
 
-###Next steps / Productionization
+### Next steps / Productionization
 
 - Ingestion: switch CSV reads to Auto Loader for Bronze.
 
@@ -118,7 +119,7 @@ assets/
 
 - Parity: optional Snowflake external stage + COPY INTO to mirror KPIs.
 
-###Credits
+### Credits
 
 Built by YOUR NAME.
 💼 LinkedIn: https://www.linkedin.com/in/deaneboone/
