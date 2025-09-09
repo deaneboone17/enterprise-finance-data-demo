@@ -55,9 +55,13 @@ Create a SQL Serverless warehouse (Small, auto-stop 10m) and run 03_kpis_gold.sq
 ### Architecture
 
   A[Raw CSVs (GCS or DBFS)] --> B[Bronze (Delta tables)]
+  
   B --> C[Silver (typed/cleaned views)]
+  
   C --> D[Gold KPIs (views)]
+  
   D --> E[Notebook charts / SQL Serverless]
+  
   
 
 ### What to demo live
