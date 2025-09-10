@@ -5,7 +5,7 @@
 [![Delta Lake](https://img.shields.io/badge/storage-Delta%20Lake-blue)](./)
 
 **What this is:** 
-a portfolio-ready data platform demo:
+a data platform demo:
 
 raw CSV ➜ **Bronze** (Delta) ➜ **Silver** (cleaned views) ➜ **Gold** KPIs (payments, revenue, chargeback rate).
 
