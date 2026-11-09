@@ -84,6 +84,8 @@ Monthly billing from January 2024 to June 2025 across three plans (basic 9.99, s
 
 Gold is views rather than tables: they always match Silver and cost nothing to store. At this size that is the right trade. At real volume you would materialize them.
 
+The two chargeback measures are dated differently. `gold_chargeback_rate` counts a chargeback in the month it was opened, while `gold_revenue_by_plan` books a lost chargeback against the month of the original payment. A cohort rate by payment month (chargebacks on a month's settled payments divided by that month's settled payments) would be more accurate; recent months would then rise as late chargebacks arrive.
+
 ## Sample output (from a real run)
 
 Silver quality step: payments 12,722 Bronze rows -> 12,621 Silver rows (101 duplicates removed); chargebacks 161 -> 156 (5 superseded pending rows removed); all NULL and duplicate-key checks pass.
