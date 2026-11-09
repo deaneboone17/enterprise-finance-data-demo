@@ -136,11 +136,23 @@ def make_scrubber(w: WorkspaceClient, me: str, cat: str):
     host = re.sub(r"^https?://", "", (w.config.host or "")).rstrip("/")
     pairs = [(host, "<workspace-host>"), (str(w.get_workspace_id()), "<workspace-id>"),
              (me, "<you>"), (cat, "<catalog>")]
-    pairs = [(a, b) for a, b in pairs if a]
+    return scrubber_from_pairs([(a, b) for a, b in pairs if a])
+
+
+def scrubber_from_pairs(pairs):
+    """Build scrub(text) from (value, placeholder) pairs.
+
+    Each value is replaced only as a whole token: it must not touch a letter,
+    digit or underscore on either side. A plain str.replace would turn
+    "domain" into "do<catalog>" for catalog "main", or rewrite part of a
+    longer number that happens to contain the workspace id.
+    """
+    patterns = [(re.compile(r"(?<![A-Za-z0-9_])" + re.escape(a) + r"(?![A-Za-z0-9_])"), b)
+                for a, b in pairs]
 
     def scrub(text: str) -> str:
-        for a, b in pairs:
-            text = text.replace(a, b)
+        for pat, b in patterns:
+            text = pat.sub(lambda _m, b=b: b, text)
         return text
     return scrub
 
